@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Check out the repo code
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      # 2. Set up Python (for any checks/tests you want to run)
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      # 3. Install dependencies
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      # 4. Basic sanity check (compiles all .py files)
+      - name: Run basic checks
+        run: |
+          python -m compileall src
+
+      # 5. Build the Docker image to make sure containerization works
+      - name: Build Docker image
+        run: |
+          docker build -t sales-app:ci .
