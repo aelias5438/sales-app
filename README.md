@@ -40,7 +40,7 @@ docker run -p 8080:8080 -p 9090:9090 sales-app
 Verify:
 Dashboard: Navigate to http://localhost:8080 to view the sales app.
 Metrics: Navigate to http://localhost:9090 to view the Prometheus metrics data.
-4) Design Decisions
+4. Design Decisions
 Why Logging & Metrics? We prioritized Observability as our core integration. In production environments, knowing that an app is running is not enough; we need to know how it is behaving.
 Logging: We utilized Python's standard logging library to ensure that all critical events (startup, errors, access) are printed to stdout. This allows Docker logs to capture them without complex file management.
 Metrics: We integrated the prometheus-client library. Instead of building a complex custom dashboard for system stats, we exposed a standard /metrics endpoint. This allows industry-standard tools (like Prometheus/Grafana) to scrape our app without us writing custom visualization code.
@@ -49,11 +49,11 @@ Complexity vs. Utility: Running a separate metrics server on port 9090 adds slig
 Storage: We are currently using ephemeral local storage for the application state. For a larger scale, we would migrate to a dedicated database (PostgreSQL).
 Ops:
 Monitoring: The application now self-reports its health. If the container crashes or restarts, the app_startups_total metric will reveal instability immediately.
-5) Results & Evaluation
+5. Results & Evaluation
 Functionality Check: The application successfully builds and serves traffic. The observability layer is active and reporting data.
 Performance: The metrics server is lightweight and runs on a separate thread, ensuring zero impact on the main dashboard's loading speed.
-6) What's Next
+6. What's Next
 Grafana Integration: Connect the port 9090 output to a Grafana dashboard for historical visualization.
 Alerting: Add logic to trigger alerts if error rates spike.
-7) Links
+7. Links
 GitHub Repo: https://github.com/aelias5438/sales-app
