@@ -25,6 +25,8 @@ Data/Models/Services:
 Source: Local sales datasets located in the src/ directory.
 Format: Python-based application serving data via HTTP.
 License: MIT License (Open Source).
+
+
 3) How to Run (Local)
 This application is containerized using Docker. Follow these steps to build and run the application locally.
 Prerequisites:
@@ -69,3 +71,4 @@ Alerting: Add logic to trigger alerts if error rates spike.
 7. Links
 
 GitHub Repo: https://github.com/aelias5438/sales-app
+Public Cloud App: https://kylev3-sales-app.azurewebsites.net/
